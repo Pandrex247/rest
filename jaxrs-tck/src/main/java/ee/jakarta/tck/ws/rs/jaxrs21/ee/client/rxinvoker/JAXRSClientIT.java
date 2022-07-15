@@ -446,7 +446,9 @@ public class JAXRSClientIT extends JAXRSCommonClient {
   public void getWithGenericTypeResponseTest() throws Fault {
     CompletionStageRxInvoker rx = startRxInvokerForMethod("get");
     GenericType<Response> generic = createGeneric(Response.class);
+    System.out.println("About to call get: " + System.nanoTime());
     Future<Response> future = rx.get(generic).toCompletableFuture();
+    System.out.println("Call submitted: " + System.nanoTime());
     checkFutureOkResponse(future);
   }
 
@@ -1906,7 +1908,9 @@ public class JAXRSClientIT extends JAXRSCommonClient {
   }
 
   protected void checkFutureOkResponse(Future<Response> future) throws Fault {
+    System.out.println("Checking Future is done: " + System.nanoTime());
     assertTrue(!future.isDone(), "Future cannot be done, yet!");
+    System.out.println("Checked Future is done: " + System.nanoTime());
     checkFutureResponseStatus(future, Status.OK);
   }
 

@@ -34,6 +34,7 @@ public class Resource {
   @GET
   @Path("get")
   public String get() {
+    System.out.println("Get called: " + System.nanoTime());
     return "get";
   }
 
